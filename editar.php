@@ -17,6 +17,8 @@ if (!empty ($_GET['id'])) {
     header('Location: index.php');
     exit;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +56,7 @@ if (!empty ($_GET['id'])) {
     </form>
     </div>
 
+    
   
     </div>
 </body>

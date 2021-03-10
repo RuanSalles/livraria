@@ -58,6 +58,8 @@ if(!empty($_POST['titulo'])) {
     $qtlivros = addslashes($_POST['qtlivros']) ;
     
     $livro->adicionarLivro($titulo, $qtpaginas, $autor, $editora, $categoria, $qtlivros);
+
+    header('Location: index.php');
 }
 
 ?>
