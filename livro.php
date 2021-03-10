@@ -17,7 +17,72 @@ class Livro {
     protected $qtlivros;
 
     
+    public function getAll() {
+		$sql = "SELECT * FROM livro";
+		$sql = $this->pdo->query($sql);
+
+		if($sql->rowCount() > 0) {
+			return $sql->fetchAll();
+		} else {
+			return array();
+		}
+	}
+
    
+    public function listarLivro ($id) {
+		$sql = 'SELECT * FROM livro WHERE id = :id';
+		$sql = $this->pdo->prepare($sql);
+		$sql->bindValue(':id', $id);
+		$sql->execute();
+
+		if ($sql->rowCount() > 0) {
+			return $sql->fetch();
+		} else {
+			return array ();
+		}
+	}
+
+
+	public function excluir($id) {
+		
+        $sql = "DELETE FROM livro WHERE id = :id";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+
+    }
+
+
+
+  
+    public function editar($titulo, $qtpaginas, $autor, $editora, $categoria, $qtlivros, $id) {
+			
+
+			$sql = "UPDATE livro SET titulo = :titulo, qtpaginas =  :qtpaginas, autor = :autor, editora = :editora, categoria = :categoria, qtlivros = :qtlivros WHERE id = :id";
+			$sql = $this->pdo->prepare($sql);
+			$sql->bindValue(':titulo', $titulo);
+			$sql->bindValue(':qtpaginas', $qtpaginas);
+			$sql->bindValue(':autor', $autor);
+            $sql->bindValue(':editora', $editora);
+            $sql->bindValue(':categoria', $categoria);
+            $sql->bindValue(':qtlivros', $qtlivros);
+            $sql->bindValue(':id', $id);
+
+			$sql->execute();
+    }
+
+        public function getInfo ($id) {
+            $sql = 'SELECT * FROM livro WHERE id = :id';
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(':id', $id);
+            $sql->execute();
+    
+            if ($sql->rowCount() > 0) {
+                return $sql->fetch();
+            } else {
+                return array ();
+            }
+        }
     
     
     public function adicionarLivro ($titulo, $qtpaginas, $autor, $editora, $categoria, $qtlivros) {
